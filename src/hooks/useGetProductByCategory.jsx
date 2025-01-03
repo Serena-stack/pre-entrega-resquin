@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import { getProductsByCategory } from "../services/productServices";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../firebase";
 
-export const useGetproductByCategory = () => {
+export const useGetproductByCategory = (id) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getProductsByCategory("smartphones")
-      .then((res) => setProducts(res.data.products))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-  }, []);
+    const collectionConfig = collection (db,"products");
+    const queryConfig = where('category', '==',id);
+    const customQuery = query(collectionConfig, queryConfig);
+
+    getDocs(customQuery).then((snapshot)  =>
+    setProducts(snapshot.docs.map((doc)  => ({ id: doc.id, ...doc.data() })))
+  ).catch((error) => console.error(error)).finally(() => setLoading(false));
+  }, [id]);
 
   return { products, loading };
 };

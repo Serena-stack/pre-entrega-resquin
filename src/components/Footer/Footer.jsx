@@ -11,7 +11,7 @@ import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
 
 const Logo = () => {
     return <Box>
-    Serena Resquin
+    TiendaOnline
     </Box>
 }
 
@@ -83,7 +83,7 @@ export default function Footer() {
                     spacing={4}
                     justify={{ base: 'center', md: 'space-between' }}
                     align={{ base: 'center', md: 'center' }}>
-                    <Text>© 2024 Serena Resquin. All rights reserved</Text>
+                    <Text>© 2024 TiendaOnline. All rights reserved</Text>
                     <Stack direction={'row'} spacing={6}>
                         <SocialButton label={'Twitter'} href={'#'}>
                             <FaTwitter />

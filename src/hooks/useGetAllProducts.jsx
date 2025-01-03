@@ -1,14 +1,28 @@
-import { useState, useEffect } from "react"
-import { getAllProducts } from "../services/productServices"
-export const useGetAllProducts = ()=>{
-    const [loading, setLoading] = useState(true)
-    const [products, setProducts]= useState([])
+import { useState, useEffect } from "react";
+import { collection, getDocs} from "firebase/firestore";
+import { db } from "../firebase";
+
+export const useGetAllProducts = (collectionName)=> {
+    const [loading, setLoading] = useState(true);
+    const [items, setItems]= useState([]);
 
     useEffect(() => {
-        getAllProducts(30)
-        .then((res)=>{setProducts(res.data.products)})
-        .catch((err) => { console.log(err) })
-        .finally(setLoading(false))
-}, [])
-    return {loading, products}
-}
+        const collectionItems = collection (db, collectionName);
+        getDocs(collectionItems)
+        .then((snapshot) => {
+            setProducts(
+                snapshot.docs.map((doc) => (
+                { id: doc.id, 
+                    ...doc.data(),
+                }
+            ))
+        );
+        })
+        .catch((error) => console.error(error))
+        .finally(() => setLoading (false));
+
+    }, [] );
+        
+    return {loading, items};
+
+};

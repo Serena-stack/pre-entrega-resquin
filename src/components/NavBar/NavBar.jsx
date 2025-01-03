@@ -17,28 +17,32 @@ import {
     Center,
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
-import { useGetAllCategories } from '../../hooks/useGetAllCategories'
+import { useGetAllProducts } from '../../hooks/useGetAllProducts'
 import { CartWidget } from '../CartWidget/CartWidget';
 
 export function NavBar() {
     const { colorMode, toggleColorMode } = useColorMode()
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const {categories} = useGetAllCategories()
+    
+    const {items} = useGetAllProducts("categories");
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-                    <Box><Link to="/">DO</Link></Box>
+                    <Box><Link to="/">Tienda</Link></Box>
                             <Menu>
                                 <MenuButton as={Button} >
                                     Categorias
                                 </MenuButton>
-                                <MenuList height={'200px'} overflowY={'scroll'}>
+                                <MenuList height={'300px'} overflowY={'scroll'}>
                                     {
-                                        categories.map((cat)=>{
+                                        items.map((catagory)=>{
                                             return(
-                                                <MenuItem key={cat.slug}>{cat.name}</MenuItem>
-                                            )
+                                                <MenuItem key={category.slug}>
+                                                <link to = {'/category/${category.slug}' }>
+                                                {category.name}
+                                                </link>
+                                                </MenuItem>
+                                            );
                                         })
                                     }
                                 </MenuList>
@@ -67,7 +71,7 @@ export function NavBar() {
                                     <Center>
                                         <Avatar
                                             size={'2xl'}
-                                            src={'../../../../DiegoDev.png'}
+                                            src={'../../../../usuario.png'}
                                         />
                                     </Center>
                                     <br />

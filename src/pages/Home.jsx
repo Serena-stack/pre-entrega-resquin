@@ -7,15 +7,12 @@ import {Loader, ItemListContainer} from "../components";
 
 export const Home = () => {
     
-    const {loading, products} = useGetAllProducts();
+    const {loading, items} = useGetAllProducts("products");
 
 
-    return loading ? (
-        <Loader />
-    ) : (
-        <Flex alignItems={"center"} textAlign={"center"} justifyContent={"center"}>
-            <ItemListContainer pro={products} />
-        </Flex>
-    );
+    return loading ? 
+        <Loader />: <ItemListContainer products={items} />;
+        
+    
 
-}
+};

@@ -18,8 +18,20 @@ import {
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
 
-export const ItemDetailContainer = () => {
-  return (
+export const ItemDetailContainer = ({product}) => {
+  const [count, setCount] = useState(0);
+  const { addItem, removeItem } = useContext(CartContext);
+  const handleRemoveProduct = () => {
+  setCount(Count - 1);
+  removeItem(product)
+  };
+  const handleAddProduct = () => {
+    setCount(count + 1);
+    addItem(product);
+    
+  };
+
+  return ( 
     <Container maxW={"7xl"}>
       <SimpleGrid
         columns={{ base: 1, lg: 2 }}
@@ -191,3 +203,4 @@ export const ItemDetailContainer = () => {
     </Container>
   );
 };
+

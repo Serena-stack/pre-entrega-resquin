@@ -10,6 +10,7 @@ export const PublicRouter = ()=>{
                 <Route exact path='/' element={<Home/>}/>
                 <Route exact path='/item/:id' element={<Item/>}/>
                 <Route exact path='/Category/:id' element={<Category/>}/>
+                <Route exact path='/Checkout/:id' element={<Checkout/>}/>
                 <Route exact path='*' element={<NotFound/>}/>
             </Routes>
         </Router>
