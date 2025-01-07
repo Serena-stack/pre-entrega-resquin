@@ -9,12 +9,11 @@ import { CartContext } from "../../context";
 const CartWidget = () => {
 const { cart } = useContext(CartContext); 
 
-  const totalItems = cart.reduce((acc, item) => acc + item.qtyCartItem, 0); // Calculamos la cantidad total de productos
-
+  const totalItems = cart.reduce((acc, item) => acc + item.qtyCartItem, 0); 
 return (
     <div>
     <img src="cart-icon.png" alt="Cart" />
-      {totalItems > 0 && <span>{totalItems}</span>} {/* Mostramos la cantidad total de productos */}
+      {totalItems > 0 && <span>{totalItems}</span>} {}
     </div>
 );
 };
